@@ -20,17 +20,21 @@ rl.on("line", function (line) {
     .map((item) => item.split(" ").map((v) => +v));
 
   const result = arr.reduce((pre, cur) => {
-    const firstCase = [, pre[0] + cur[1], pre[0] + cur[2]];
-    const secondCase = [pre[1] + cur[0], , pre[1] + cur[2]];
-    const thirdCase = [pre[2] + cur[0], pre[2] + cur[1]];
+    cur[0] += Math.min(pre[1], pre[2]);
+    cur[1] += Math.min(pre[0], pre[2]);
+    cur[2] += Math.min(pre[0], pre[1]);
+    // const firstCase = [, pre[0] + cur[1], pre[0] + cur[2]];
+    // const secondCase = [pre[1] + cur[0], , pre[1] + cur[2]];
+    // const thirdCase = [pre[2] + cur[0], pre[2] + cur[1]];
 
-    const result = [
-      Math.min(secondCase[0], thirdCase[0]),
-      Math.min(firstCase[1], thirdCase[1]),
-      Math.min(firstCase[2], secondCase[2]),
-    ];
-    console.log(result);
-    return result;
+    // const result = [
+    //   Math.min(secondCase[0], thirdCase[0]),
+    //   Math.min(firstCase[1], thirdCase[1]),
+    //   Math.min(firstCase[2], secondCase[2]),
+    // ];
+    // console.log(result);
+    // return result;
+    return cur;
   });
   console.log(Math.min(...result));
 
