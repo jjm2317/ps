@@ -107,4 +107,4 @@ maxStoreRate
 minStoreRate
 crtStoreRate`;
 
-console.log(getAddTypeString(getSnakeToCamel(qkdNode)).join(";\n"));
+console.log(getAddTypeString(getSnakeToCamel(qkdService)).join(";\n"));
