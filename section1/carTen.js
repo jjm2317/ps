@@ -39,7 +39,7 @@ rl.on("line", (line) => {
 
   if (input.length === 2) rl.close();
 }).on("close", () => {
-  const day = input[0];
+  const day = input[0][input[0].length - 1];
   const carNum = input[1].split(" ");
   console.log(
     carNum.reduce((pre, cur) => {
