@@ -12,6 +12,12 @@ const getSnakeToCamel = (str) => {
 // field 앞에 String 붙이기
 const getAddTypeString = (arr) => arr.map((v) => `String ${v}`);
 
+// jsonObject.put("필드이름", ) 만들기
+const getJsonObjectPutStatement = (str) => {
+  const arr = str.split("\n").map((v) => `jsonObject.put("${v}", );`);
+  return arr.join("\n");
+};
+
 /* qkd 관련 field*/
 const qkdNode = `qkdn_id
 qkdn_location_id
@@ -107,4 +113,8 @@ maxStoreRate
 minStoreRate
 crtStoreRate`;
 
-console.log(getAddTypeString(getSnakeToCamel(qkdService)).join(";\n"));
+console.log(
+  getAddTypeString(getSnakeToCamel(qkdServiceLinkQkeyStore)).join(";\n")
+);
+
+console.log(getJsonObjectPutStatement(qkdNode));
