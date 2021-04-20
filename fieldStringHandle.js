@@ -113,8 +113,8 @@ maxStoreRate
 minStoreRate
 crtStoreRate`;
 
-console.log(
-  getAddTypeString(getSnakeToCamel(qkdServiceLinkQkeyStore)).join(";\n")
-);
+// console.log(
+//   getAddTypeString(getSnakeToCamel(qkdServiceLinkQkeyStore)).join(";\n")
+// );
 
-console.log(getJsonObjectPutStatement(qkdNode));
+console.log(getJsonObjectPutStatement(qkdPhysLink));
