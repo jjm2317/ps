@@ -29,12 +29,12 @@ const input = [];
 
 rl.on("line", (line) => {
   input.push(line);
-  rl.close();
+  if (input.length === 9) rl.close();
 }).on("close", () => {
-  const arr = input[0].split(" ").map((v) => +v);
+  const arr = input.map((v) => +v.trim());
   let resultArr = [];
-  for (let i = 0; i < arr.length; i++) {
-    for (let k = 0; k < arr.length; k++) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let k = i + 1; k < arr.length; k++) {
       if (k === i) continue;
       let newArr = arr.filter((_, idx) => idx !== i && idx !== k);
 
@@ -47,5 +47,5 @@ rl.on("line", (line) => {
     if (resultArr.length !== 0) break;
   }
 
-  console.log(resultArr);
+  resultArr.forEach((item) => console.log(item));
 });
