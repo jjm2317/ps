@@ -67,6 +67,24 @@ virt_eskr
 path_recovery hold_off_timer
 deploy_path_primary_id
 deploy_path_secondary_id`;
+const qkdVirtLinkV2 = `virt_link_id
+virt_link_type
+app_id
+local_qkdn_id
+remote_qkdn_id
+num_of_candidate_paths
+path
+deploy_path_id
+deply_phys_link_id
+deploy_virt_link_state
+performance
+virt_link_prop
+path_recovery hold_off_timer
+path_recovery_mode
+primaryUsage
+primaryFault
+secondaryUsage
+secondaryFault`;
 
 const qkdService = `app_id
 app_type
@@ -82,14 +100,7 @@ local_qkdn_id
 local_qkdi_id
 remote_qkdn_id
 remote_qkdi_id
-virt_link_id
-app_agent_ip
-app_agent_protocol
-app_agent_port
-app_interface_key_type
-app_interface_key_code
-app_interface_process_code
-qkeystore`;
+virt_link_id`;
 
 const qkdPhysLinkQkeyStore = `phys_link_id
 maxKeyCount
@@ -117,4 +128,4 @@ crtStoreRate`;
 //   getAddTypeString(getSnakeToCamel(qkdServiceLinkQkeyStore)).join(";\n")
 // );
 
-console.log(getJsonObjectPutStatement(qkdPhysLink));
+console.log(getJsonObjectPutStatement(qkdService));
