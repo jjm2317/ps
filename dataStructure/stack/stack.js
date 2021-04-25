@@ -7,7 +7,7 @@ const Stack = (function () {
 
   Stack.prototype.push = function (item) {
     try {
-      if (this.top + 1 === this.capacity) throw Error;
+      if (this.isFullStack()) throw Error; // this.capacity *= 2; dynamic array
       this.top === -1 ? (this.top = 0) : this.top++;
       this.array[this.top] = item;
     } catch (e) {
