@@ -28,24 +28,18 @@ rl.on("line", (line) => {
   rl.close();
 }).on("close", () => {
   const str = input[0];
-
-  let count = 1;
+  let count = 0;
   let result = "";
-  let temp = str[0];
-  for (let i = 1; i < str.length; i++) {
-    if (str[i] !== str[i - 1]) {
-      result += temp;
-      result += count === 1 ? "" : count;
-      count = 1;
-      continue;
-    }
-    temp = str[i];
+  for (let i = 0; i < str.length; i++) {
     count++;
+    if (str[i] !== str[i + 1]) {
+      result += str[i];
+      if (count !== 1) {
+        result += count;
+      }
+      count = 0;
+    }
   }
-  if (count == 1) {
-    result += temp;
-  } else {
-    result += temp + count;
-  }
+
   console.log(result);
 });
