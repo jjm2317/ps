@@ -127,7 +127,9 @@ crtStoreRate`;
 const qkdUiLinkbook = `group_nm
 sec_start
 sec_end
-line_id 
+start_ne_name
+end_ne_name
+line_id
 original_service_name
 service_name
 display_name
@@ -142,11 +144,15 @@ key_status_end
 key_req_interval
 path_recovery_mode
 path_recovery_hold_off_timer
-is_home_path
+protection_status
 active_state
+is_home_path
 latency
 app_creation_time
 app_expiration_time
+noc_line_id
+user_id
+line_comment
 st_vs_system_name
 st_vs_management_team
 st_vs_manufacture_company
@@ -205,10 +211,14 @@ ed_vs_shelf
 ed_vs_slot
 ed_vs_port
 ed_vs_fdf
-ed_vs_kms_nb_ip
+ad_vs_kms_nb_ip
 main_path 
 bypass_path`;
-console.log(getAddTypeString(getSnakeToCamel(qkdUiLinkbook)).join(";\n"));
+console.log(
+  getAddTypeString(getSnakeToCamel(qkdUiLinkbook))
+    .map((field) => `@Column(length = 30)\n${field};`)
+    .join("\n")
+);
 
 // console.log(getJsonObjectPutStatement(qkdService));
 
