@@ -18,6 +18,38 @@
 20 7 23 19 10 8 13
 */
 
+// const readline = require("readline");
+
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// });
+
+// const input = [];
+
+// rl.on("line", (line) => {
+//   input.push(line);
+//   if (input.length === 9) rl.close();
+// }).on("close", () => {
+//   const arr = input.map((v) => +v.trim());
+//   let resultArr = [];
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     for (let k = i + 1; k < arr.length; k++) {
+//       if (k === i) continue;
+//       let newArr = arr.filter((_, idx) => idx !== i && idx !== k);
+
+//       if (newArr.reduce((pre, cur) => pre + cur) === 100) {
+//         resultArr = newArr;
+//         break;
+//       }
+//     }
+
+//     if (resultArr.length !== 0) break;
+//   }
+
+//   resultArr.forEach((item) => console.log(item));
+// });
+
 const readline = require("readline");
 
 const rl = readline.createInterface({
@@ -29,23 +61,19 @@ const input = [];
 
 rl.on("line", (line) => {
   input.push(line);
-  if (input.length === 9) rl.close();
-}).on("close", () => {
-  const arr = input.map((v) => +v.trim());
-  let resultArr = [];
-  for (let i = 0; i < arr.length - 1; i++) {
-    for (let k = i + 1; k < arr.length; k++) {
-      if (k === i) continue;
-      let newArr = arr.filter((_, idx) => idx !== i && idx !== k);
 
-      if (newArr.reduce((pre, cur) => pre + cur) === 100) {
-        resultArr = newArr;
-        break;
+  rl.close();
+}).on("close", () => {
+  let arr = input[0].split(" ").map((v) => +v);
+
+  let sum = arr.reduce((pre, cur) => pre + cur);
+
+  for (let i = 0; i < [...arr].length; i++) {
+    for (let j = i + 1; j < [...arr].length; j++) {
+      if (sum - arr[i] - arr[j] === 100) {
       }
     }
-
-    if (resultArr.length !== 0) break;
   }
 
-  resultArr.forEach((item) => console.log(item));
+  console.log(arr);
 });
