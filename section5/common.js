@@ -32,25 +32,48 @@ rl.on("line", (line) => {
   input.push(line);
   if (input.length === 4) rl.close();
 }).on("close", () => {
-  let [n, firstArr, m, secondArr] = input;
-  n = +n;
-  m = +m;
-  firstArr = firstArr.split(" ").map((v) => +v);
-  secondArr = secondArr.split(" ").map((v) => +v);
+  // let [n, firstArr, m, secondArr] = input;
+  // n = +n;
+  // m = +m;
+  // firstArr = firstArr.split(" ").map((v) => +v);
+  // secondArr = secondArr.split(" ").map((v) => +v);
 
-  firstArr.sort((a, b) => a - b);
-  secondArr.sort((a, b) => a - b);
-  let result = [];
-  for (let i = 0, j = 0; i < n && j < m; ) {
-    if (firstArr[i] < secondArr[j]) {
-      i++;
-    } else if (firstArr[i] < secondArr[j]) {
-      j++;
+  // firstArr.sort((a, b) => a - b);
+  // secondArr.sort((a, b) => a - b);
+  // let result = [];
+  // for (let i = 0, j = 0; i < n && j < m; ) {
+  //   if (firstArr[i] < secondArr[j]) {
+  //     i++;
+  //   } else if (firstArr[i] < secondArr[j]) {
+  //     j++;
+  //   } else {
+  //     result.push(firstArr[i]);
+  //     i++;
+  //     j++;
+  //   }
+  // }
+  // console.log(result);
+  let [n, fArr, m, sArr] = input;
+  n = +n;
+  fArr = fArr.split(" ").map((v) => +v);
+  m = +m;
+  sArr = sArr.split(" ").map((v) => +v);
+  fArr.sort((a, b) => a - b);
+  sArr.sort((a, b) => a - b);
+  const result = [];
+  let p1 = (p2 = 0);
+
+  while (p1 < n && p2 < m) {
+    if (fArr[p1] === sArr[p2]) {
+      result.push(fArr[p1]);
+      p1++;
+      p2++;
+    } else if (fArr[p1] < sArr[p2]) {
+      p1++;
     } else {
-      result.push(firstArr[i]);
-      i++;
-      j++;
+      p2++;
     }
   }
+
   console.log(result);
 });
