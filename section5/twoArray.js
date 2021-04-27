@@ -31,22 +31,57 @@ rl.on("line", (line) => {
   input.push(line);
   if (input.length === 4) rl.close();
 }).on("close", () => {
-  let [n, firstArr, m, secondArr] = input;
+  // let [n, firstArr, m, secondArr] = input;
 
-  firstArr = firstArr.split(" ").map((v) => +v);
-  secondArr = secondArr.split(" ").map((v) => +v);
+  // firstArr = firstArr.split(" ").map((v) => +v);
+  // secondArr = secondArr.split(" ").map((v) => +v);
+  // let result = [];
+  // for (let i = 0, j = 0; i < n || j < m; ) {
+  //   let fValue = firstArr[i] || Number.MAX_SAFE_INTEGER;
+  //   let sValue = secondArr[j] || Number.MAX_SAFE_INTEGER;
+
+  //   if (fValue < sValue) {
+  //     result.push(fValue);
+  //     i++;
+  //   } else {
+  //     result.push(sValue);
+  //     j++;
+  //   }
+  // }
+
+  // console.log(result);
+
+  let [n, arr1, m, arr2] = input;
+
+  n = +n;
+  arr1 = arr1.split(" ").map((v) => +v);
+  m = +m;
+  arr2 = arr2.split(" ").map((v) => +v);
+
   let result = [];
-  for (let i = 0, j = 0; i < n || j < m; ) {
-    let fValue = firstArr[i] || Number.MAX_SAFE_INTEGER;
-    let sValue = secondArr[j] || Number.MAX_SAFE_INTEGER;
+  let p1 = (p2 = 0);
 
-    if (fValue < sValue) {
-      result.push(fValue);
-      i++;
+  while (p1 < n && p2 < m) {
+    if (arr1[p1] < arr2[p2]) {
+      result.push(arr1[p1]);
+      p1++;
+    } else if (arr1[p1] > arr2[p2]) {
+      result.push(arr2[p2]);
+      p2++;
     } else {
-      result.push(sValue);
-      j++;
+      result.push(arr1[p1]);
+      result.push(arr2[p2]);
+      p1++;
+      p2++;
     }
+  }
+  while (p1 < n) {
+    result.push(arr1[p1]);
+    p1++;
+  }
+  while (p2 < m) {
+    result.push(arr2[p2]);
+    p2++;
   }
 
   console.log(result);
