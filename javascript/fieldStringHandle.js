@@ -9,6 +9,12 @@ const getSnakeToCamel = (str) => {
   });
 };
 
+//camelCase to snake_case, 단일 문자열 대상
+const getCamelToSnake = (str) => {
+  let result = '';
+  for(let i)
+}
+
 // field 앞에 String 붙이기
 const getAddTypeString = (arr) => arr.map((v) => `String ${v}`);
 
@@ -214,6 +220,86 @@ ed_vs_fdf
 ad_vs_kms_nb_ip
 main_path 
 bypass_path`;
+
+const qkdUiLinkbookDefault = `this.groupNm = groupNm;
+this.startNeName = startNeName;
+this.endNeName = endNeName;
+this.serviceId= serviceId;
+this.originalServiceName = originalServiceName;
+this.serviceType = serviceType;
+this.vendor = vendor;
+this.protectionKind = protectionKind;
+this.lineCapa = lineCapa;
+this.eConsumptionExternal = eConsumptionExternal;
+this.eConsumptionInternal = eConsumptionInternal;
+this.keyStatusStart = keyStatusStart;
+this.keyStatusEnd = keyStatusEnd;
+this.keyReqInterval = keyReqInterval;
+this.pathRecoveryMode = pathRecoveryMode;
+this.pathRecoveryHoldOffTimer = pathRecoveryHoldOffTimer;
+this.protectionStatus = protectionStatus;
+this.activeState = activeState;
+this.isHomePath = isHomePath;
+this.latency = latency;
+this.appCreationTime = appCreationTime;
+this.appExpirationTime = appExpirationTime;
+this.nocLineId = nocLineId;
+this.userId = userId;
+this.stVsSystemName = stVsSystemName;
+this.stVsManagementTeam = stVsManagementTeam;
+this.stVsManufactureCompany = stVsManufactureCompany;
+this.stVsNodeName = stVsNodeName;
+this.stVsUnit = stVsUnit;
+this.stVsShelf = stVsShelf;
+this.stVsSlot = stVsSlot;
+this.stVsPort = stVsPort;
+this.stVsFdf = stVsFdf;
+this.stVsKmsNbIp = stVsKmsNbIp;
+this.stTcSystemName = stTcSystemName;
+this.stTcManagementTeam = stTcManagementTeam;
+this.stTcManufactureCompany = stTcManufactureCompany;
+this.stTcNodeName = stTcNodeName;
+this.stTcUnit = stTcUnit;
+this.stTcPort = stTcPort;
+this.stTcKmsSbIp = stTcKmsSbIp;
+this.stLnSystemName = stLnSystemName;
+this.stLnManagementTeam = stLnManagementTeam;
+this.stLnManufactureCompany = stLnManufactureCompany;
+this.stLnNodeName = stLnNodeName;
+this.stLnUnit = stLnUnit;
+this.stLnShelf = stLnShelf;
+this.stLnSlot = stLnSlot;
+this.stLnPort = stLnPort;
+this.stLnFdf = stLnFdf;
+this.edLnSystemName = edLnSystemName;
+this.edLnManagementTeam = edLnManagementTeam;
+this.edLnManufactureCompany = edLnManufactureCompany;
+this.edLnNodeName = edLnNodeName;
+this.edLnUnit = edLnUnit;
+this.edLnShelf = edLnShelf;
+this.edLnSlot = edLnSlot;
+this.edLnPort = edLnPort;
+this.edLnFdf = edLnFdf;
+this.edTcSystemName = edTcSystemName;
+this.edTcManagementTeam = edTcManagementTeam;
+this.edTcManufactureCompany = edTcManufactureCompany;
+this.edTcNodeName = edTcNodeName;
+this.edTcUnit = edTcUnit;
+this.edTcPort = edTcPort;
+this.edTcFdf = edTcFdf;
+this.edTcKmsSbIp = edTcKmsSbIp;
+this.edVsSystemName = edVsSystemName;
+this.edVsManagementTeam = edVsManagementTeam;
+this.edVsManufactureCompany = edVsManufactureCompany;
+this.edVsNodeName = edVsNodeName;
+this.edVsUnit = edVsUnit;
+this.edVsShelf = edVsShelf;
+this.edVsSlot = edVsSlot;
+this.edVsPort = edVsPort;
+this.edVsFdf = edVsFdf;
+this.adVsKmsNbIp = adVsKmsNbIp;
+this.mainPath = mainPath;
+this.bypassPath = bypassPath;`
 console.log(
   getAddTypeString(getSnakeToCamel(qkdUiLinkbook))
     .map((field) => `@Column(length = 30)\n${field};`)
