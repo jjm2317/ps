@@ -22,19 +22,30 @@ rl.on("line", (line) => {
   input.push(line);
   rl.close();
 }).on("close", () => {
-  let min = Number.MAX_SAFE_INTEGER;
-  const arr = input[0].split(" ").map((v) => +v);
+  // let min = Number.MAX_SAFE_INTEGER;
+  // const arr = input[0].split(" ").map((v) => +v);
 
-  for (let num of arr) {
-    if (min > num) {
-      min = num;
-    }
-  }
-  console.log(min);
+  // for (let num of arr) {
+  //   if (min > num) {
+  //     min = num;
+  //   }
+  // }
+
+  // console.log(min);
   // console.log(
   //   input[0]
   //     .split(" ")
   //     .map((v) => +v)
   //     .reduce((pre, cur) => (pre > cur ? cur : pre))
   // )
+
+  let min = Number.MAX_SAFE_INTEGER;
+
+  const arr = input[0].split(" ").map((v) => +v);
+
+  for (let num of arr) {
+    if (min > num) min = num;
+  }
+
+  console.log(min);
 });
