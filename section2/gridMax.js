@@ -25,46 +25,66 @@ N*N의 격자판이 주어지면 각 행의 합, 각 열의 합, 두 대각선�
 155
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
 
   if (input.length - 1 === +input[0]) rl.close();
-}).on("close", () => {
-  const n = +input[0];
-  const grid = input
-    .filter((_, i) => i > 0)
-    .map((arr) => arr.split(" ").map((v) => +v));
-  const rowSums = [];
-  const colSums = [];
+}).on('close', () => {
+  // const n = +input[0];
+  // const grid = input
+  //   .filter((_, i) => i > 0)
+  //   .map((arr) => arr.split(" ").map((v) => +v));
+  // const rowSums = [];
+  // const colSums = [];
+  // let diagSum1 = 0;
+  // let diagSum2 = 0;
+  // for (let i = 0; i < n; i++) {
+  //   let rowSum = 0;
+  //   let colSum = 0;
+  //   for (let j = 0; j < n; j++) {
+  //     rowSum += grid[i][j];
+  //     colSum += grid[j][i];
+  //   }
+  //   diagSum1 += grid[i][i];
+  //   diagSum2 += grid[i][n - 1 - i];
+  //   rowSums.push(rowSum);
+  //   colSums.push(colSum);
+  // }
+
+  // const value = [...rowSums, ...colSums, diagSum1, diagSum2].reduce(
+  //   (pre, cur) => {
+  //     if (pre < cur) return cur;
+  //     return pre;
+  //   }
+  // );
+  // console.log(value);
+
+  const n = input[0];
+  const arr = input.filter((_, i) => i > 0).map(v => v.split(' ').map(v => +v));
   let diagSum1 = 0;
   let diagSum2 = 0;
+  let rowSum = 0;
+  let colSum = 0;
+  let max = Number.MIN_SAFE_INTEGER;
   for (let i = 0; i < n; i++) {
-    let rowSum = 0;
-    let colSum = 0;
     for (let j = 0; j < n; j++) {
-      rowSum += grid[i][j];
-      colSum += grid[j][i];
+      rowSum += arr[i][j];
+      colSum += arr[j][i];
     }
-    diagSum1 += grid[i][i];
-    diagSum2 += grid[i][n - 1 - i];
-    rowSums.push(rowSum);
-    colSums.push(colSum);
+    diagSum1 += arr[i][i];
+    diagSum2 += arr[i][n - i - 1];
+    max = Math.max(max, rowSum, colSum);
+    rowSum = 0;
+    colSum = 0;
   }
-
-  const value = [...rowSums, ...colSums, diagSum1, diagSum2].reduce(
-    (pre, cur) => {
-      if (pre < cur) return cur;
-      return pre;
-    }
-  );
-  console.log(value);
+  console.log(Math.max(diagSum1, diagSum2, max));
 });

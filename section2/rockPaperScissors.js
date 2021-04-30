@@ -28,39 +28,53 @@ B
 D
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.Interface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
 
   if (input.length === 3) rl.close();
-}).on("close", () => {
+}).on('close', () => {
+  // const n = +input[0];
+  // const arrA = input[1].split(" ").map((v) => +v);
+  // const arrB = input[2].split(" ").map((v) => +v);
+  // const result = [];
+  // const getWinner = (a, b) => {
+  //   if (a - b > 0) {
+  //     return a === 3 && b === 1 ? "B" : "A";
+  //   }
+
+  //   if (b - a > 0) {
+  //     return a === 1 && b === 3 ? "A" : "B";
+  //   }
+
+  //   if (a === b) return "D";
+  // };
+
+  // for (let i = 0; i < n; i++) {
+  //   result.push(getWinner(arrA[i], arrB[i]));
+  // }
+
+  // result.forEach((v) => console.log(v));
+
   const n = +input[0];
-  const arrA = input[1].split(" ").map((v) => +v);
-  const arrB = input[2].split(" ").map((v) => +v);
+  const [aList, bList] = input.filter((_, i) => i > 0).map(item => item.split(' ').map(v => +v));
   const result = [];
-  const getWinner = (a, b) => {
-    if (a - b > 0) {
-      return a === 3 && b === 1 ? "B" : "A";
-    }
-
-    if (b - a > 0) {
-      return a === 1 && b === 3 ? "A" : "B";
-    }
-
-    if (a === b) return "D";
-  };
-
   for (let i = 0; i < n; i++) {
-    result.push(getWinner(arrA[i], arrB[i]));
+    if (aList[i] - bList[i] === 1) {
+      result.push('A');
+    } else if (aList[i] === bList[i]) {
+      result.push('D');
+    } else {
+      result.push('B');
+    }
   }
-
-  result.forEach((v) => console.log(v));
+  console.log(result);
 });
