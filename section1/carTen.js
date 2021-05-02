@@ -39,11 +39,23 @@ rl.on("line", (line) => {
 
   if (input.length === 2) rl.close();
 }).on("close", () => {
-  const day = input[0][input[0].length - 1];
-  const carNum = input[1].split(" ");
-  console.log(
-    carNum.reduce((pre, cur) => {
-      return cur[1] === day ? ++pre : pre;
-    }, 0)
-  );
+  // const day = input[0][input[0].length - 1];
+  // const carNum = input[1].split(" ");
+  // console.log(
+  //   carNum.reduce((pre, cur) => {
+  //     return cur[1] === day ? ++pre : pre;
+  //   }, 0)
+  // );
+
+  let n = +input[0];
+  let arr = input[1].split(" ").map((v) => +v);
+
+  let count = 0;
+
+  for (let num of arr) {
+    if (num % 10 === n) {
+      count++;
+    }
+  }
+  console.log(count);
 });

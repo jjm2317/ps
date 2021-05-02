@@ -27,16 +27,28 @@ rl.on("line", (line) => {
   // console.log(sum, min);
 
   //배열 고차함수 사용
-  const { sum, min } = numArr.reduce(
-    ({ sum, min }, cur) => {
-      if (cur % 2) {
-        sum += cur;
-        if (cur < min) min = cur;
-      }
-      return { sum, min };
-    },
-    { sum: 0, min: Number.MAX_SAFE_INTEGER }
-  );
+  // const { sum, min } = numArr.reduce(
+  //   ({ sum, min }, cur) => {
+  //     if (cur % 2) {
+  //       sum += cur;
+  //       if (cur < min) min = cur;
+  //     }
+  //     return { sum, min };
+  //   },
+  //   { sum: 0, min: Number.MAX_SAFE_INTEGER }
+  // );
+
+  // console.log(sum, min);
+
+  let sum = 0;
+  let min = Number.MAX_SAFE_INTEGER;
+  const arr = input[0].split(" ").map((v) => +v);
+  for (let num of arr) {
+    if (num % 2) {
+      if (min > num) num = min;
+      sum += num;
+    }
+  }
 
   console.log(sum, min);
 });

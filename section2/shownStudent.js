@@ -14,30 +14,42 @@
 5
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
 
   if (input.length === 2) rl.close();
-}).on("close", () => {
-  const heightArr = input[1].split(" ").map((v) => +v);
-  const result = [heightArr[0]];
+}).on('close', () => {
+  // const heightArr = input[1].split(" ").map((v) => +v);
+  // const result = [heightArr[0]];
 
-  heightArr.reduce((pre, cur) => {
-    if (pre < cur) {
-      result.push(cur);
-      return cur;
+  // heightArr.reduce((pre, cur) => {
+  //   if (pre < cur) {
+  //     result.push(cur);
+  //     return cur;
+  //   }
+  //   return pre;
+  // });
+
+  // console.log(result.length);
+
+  const n = +input[0];
+  const arr = input[1].split(' ').map(v => +v);
+  let max = Number.MIN_SAFE_INTEGER;
+  let result = 0;
+  for (let student of arr) {
+    if (student > max) {
+      result++;
+      max = student;
     }
-    return pre;
-  });
-
-  console.log(result.length);
+  }
+  console.log(result);
 });

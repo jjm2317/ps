@@ -64,13 +64,26 @@ rl.on("line", (line) => {
 
   rl.close();
 }).on("close", () => {
-  let arr = input[0].split(" ").map((v) => +v);
+  // let arr = input[0].split(" ").map((v) => +v);
 
-  let sum = arr.reduce((pre, cur) => pre + cur);
+  // let sum = arr.reduce((pre, cur) => pre + cur);
 
-  for (let i = 0; i < [...arr].length; i++) {
-    for (let j = i + 1; j < [...arr].length; j++) {
+  // for (let i = 0; i < [...arr].length; i++) {
+  //   for (let j = i + 1; j < [...arr].length; j++) {
+  //     if (sum - arr[i] - arr[j] === 100) {
+  //     }
+  //   }
+  // }
+
+  // console.log(arr);
+  const arr = input[0].split(" ").map((v) => +v);
+  const sum = arr.reduce((pre, cur) => pre + cur);
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
       if (sum - arr[i] - arr[j] === 100) {
+        arr.splice(j, 1);
+        arr.splice(i, 1);
+        break;
       }
     }
   }

@@ -26,10 +26,15 @@ rl.on("line", (line) => {
   input.push(line);
   rl.close();
 }).on("close", () => {
+  // const arr = input[0].split(" ").map((v) => +v);
+
+  // const maxValue = Math.max(...arr);
+  // arr.splice(arr.indexOf(maxValue), 1);
+
+  // console.log(maxValue < arr.reduce((v1, v2) => v1 + v2) ? "YES" : "NO");
   const arr = input[0].split(" ").map((v) => +v);
+  let max = Math.max(...arr);
+  let sum = arr.reduce((pre, cur) => pre + cur);
 
-  const maxValue = Math.max(...arr);
-  arr.splice(arr.indexOf(maxValue), 1);
-
-  console.log(maxValue < arr.reduce((v1, v2) => v1 + v2) ? "YES" : "NO");
+  console.log(sum - max > max ? "YES" : "NO");
 });
