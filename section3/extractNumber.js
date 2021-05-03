@@ -15,21 +15,32 @@ g0en2T0s8eSoft
 208
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
   rl.close();
-}).on("close", () => {
-  const str = input[0];
+}).on('close', () => {
+  // const str = input[0];
 
-  const result = +str.match(/[0-9]/g).join("");
-  console.log(result);
+  // const result = +str.match(/[0-9]/g).join("");
+  // console.log(result);
+  const str = input[0];
+  let result = '';
+
+  // for (let s of str) {
+  //   s.match(/[0-9]/) && (result += s);
+  // }
+  for (let s of str) {
+    if (!isNaN(s)) result += s;
+  }
+  console.log(+result);
+  // console.log(+str.replace(/[^0-9]/gi, ''));
 });

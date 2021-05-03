@@ -15,30 +15,55 @@ N개의 자연수가 입력되면 각 자연수를 뒤집은 후 그 뒤집은 �
 23 2 73 2 3
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
   if (input.length === 2) rl.close();
-}).on("close", () => {
-  const arr = input[1].split(" ").map((v) => +v.split("").reverse().join(""));
-  const result = [];
-  const isPrime = (num) => {
-    let count = 0;
-    for (let i = 1; i <= num; i++) {
-      if (num % i === 0) count++;
+}).on('close', () => {
+  // const arr = input[1].split(" ").map((v) => +v.split("").reverse().join(""));
+  // const result = [];
+  // const isPrime = (num) => {
+  //   let count = 0;
+  //   for (let i = 1; i <= num; i++) {
+  //     if (num % i === 0) count++;
+  //   }
+  //   return count === 2;
+  // };
+  // for (let revNum of arr) {
+  //   isPrime(revNum) && result.push(revNum);
+  // }
+  // console.log(result.join(" "));
+
+  const n = +input[0];
+  const arr = input[1].split(' ').map(v => +v);
+  const isPrime = num => {
+    if (num === 1) return false;
+    for (let i = 2; i < num; i++) {
+      // if(num / i)
+      if (num % i === 0) return false;
     }
-    return count === 2;
+    return true;
   };
-  for (let revNum of arr) {
-    isPrime(revNum) && result.push(revNum);
+
+  let result = [];
+
+  for (let num of arr) {
+    let temp = 0;
+    while (num) {
+      temp *= 10;
+      temp += num % 10;
+      num = Math.floor(num / 10);
+    }
+
+    if (isPrime(temp)) result.push(temp);
   }
-  console.log(result.join(" "));
+  console.log(result);
 });

@@ -13,33 +13,46 @@ KKHSSSSSSSE
 K2HS7E
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
 
   rl.close();
-}).on("close", () => {
+}).on('close', () => {
+  // const str = input[0];
+  // let count = 0;
+  // let result = "";
+  // for (let i = 0; i < str.length; i++) {
+  //   count++;
+  //   if (str[i] !== str[i + 1]) {
+  //     result += str[i];
+  //     if (count !== 1) {
+  //       result += count;
+  //     }
+  //     count = 0;
+  //   }
+  // }
+
+  // console.log(result);
   const str = input[0];
-  let count = 0;
-  let result = "";
+
+  let result = '';
+  let count = 1;
   for (let i = 0; i < str.length; i++) {
-    count++;
-    if (str[i] !== str[i + 1]) {
-      result += str[i];
-      if (count !== 1) {
-        result += count;
-      }
-      count = 0;
+    if (str[i] === str[i + 1]) {
+      count++;
+    } else {
+      result += str[i] + (count > 1 ? count : '');
+      count = 1;
     }
   }
-
   console.log(result);
 });

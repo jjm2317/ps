@@ -15,24 +15,31 @@ found7, time: study; Yduts; emit, 7Dnuof
 YES
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
 
   rl.close();
-}).on("close", () => {
-  let str = input[0].toLowerCase();
-  let newStr = str.replace(/[^a-zA-Z]/gi, "");
-  console.log(newStr);
-  let reverseStr = Array.from(newStr).reverse().join("");
+}).on('close', () => {
+  // let str = input[0].toLowerCase();
+  // let newStr = str.replace(/[^a-zA-Z]/gi, "");
+  // console.log(newStr);
+  // let reverseStr = Array.from(newStr).reverse().join("");
 
-  console.log(newStr === reverseStr ? "YES" : "NO");
+  // console.log(newStr === reverseStr ? "YES" : "NO");
+  const str = input[0].toLowerCase();
+  let newStr = '';
+  for (let s of str) {
+    if ('a' < s && s < 'z') newStr += s;
+  }
+
+  console.log(Array.from(newStr).reverse().join('') === newStr ? 'YES' : 'NO');
 });
