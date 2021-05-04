@@ -29,42 +29,82 @@
 10
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
 
   if (input.length - 1 === +input[0]) rl.close();
-}).on("close", () => {
-  const n = +input[0];
-  let grid = input
-    .filter((_, i) => i > 0)
-    .map((str) => [0, ...str.split(" "), 0].map((v) => +v));
-  grid = [
-    Array.from({ length: n + 2 }, (v) => 0),
-    ...grid,
-    Array.from({ length: n + 2 }, (v) => 0),
-  ];
+}).on('close', () => {
+  // const n = +input[0];
+  // let grid = input
+  //   .filter((_, i) => i > 0)
+  //   .map((str) => [0, ...str.split(" "), 0].map((v) => +v));
+  // grid = [
+  //   Array.from({ length: n + 2 }, (v) => 0),
+  //   ...grid,
+  //   Array.from({ length: n + 2 }, (v) => 0),
+  // ];
 
-  let count = 0;
-  for (let i = 1; i < n + 1; i++) {
-    for (let j = 1; j < n + 1; j++) {
-      if (
-        grid[i][j] > grid[i - 1][j] &&
-        grid[i][j] > grid[i][j - 1] &&
-        grid[i][j] > grid[i + 1][j] &&
-        grid[i][j] > grid[i][j + 1]
-      )
-        count += 1;
+  // let count = 0;
+  // for (let i = 1; i < n + 1; i++) {
+  //   for (let j = 1; j < n + 1; j++) {
+  //     if (
+  //       grid[i][j] > grid[i - 1][j] &&
+  //       grid[i][j] > grid[i][j - 1] &&
+  //       grid[i][j] > grid[i + 1][j] &&
+  //       grid[i][j] > grid[i][j + 1]
+  //     )
+  //       count += 1;
+  //   }
+  // }
+
+  // console.log(count);
+
+  // const n = +input[0];
+  // let arr = input.filter((_, i) => i > 0).map(v => [0, ...v.split(' ').map(v => +v), 0]);
+  // let result = 0;
+  // arr = [Array.from({ length: n + 2 }, () => 0), ...arr, Array.from({ length: n + 2 }, () => 0)];
+
+  // for (let i = 1; i <= n; i++) {
+  //   for (let j = 1; j <= n; j++) {
+  //     if (
+  //       arr[i][j] > arr[i - 1][j] &&
+  //       arr[i][j] > arr[i][j - 1] &&
+  //       arr[i][j] > arr[i][j + 1] &&
+  //       arr[i][j] > arr[i + 1][j]
+  //     ) {
+  //       result++;
+  //     }
+  //   }
+  // }
+  // console.log(result);
+
+  const n = +input[0];
+  const arr = input.filter((_, i) => i > 0).map(v => v.split(' ').map(v => +v));
+  const dx = [-1, 0, 1, 0];
+  const dy = [0, 1, 0, -1];
+  let result = 0;
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      let isPeak = true;
+      for (let k = 0; k < 4; k++) {
+        let nx = i + dx[k];
+        let ny = j + dy[k];
+        if (nx >= 0 && ny >= 0 && nx < n && ny < n && arr[i][j] <= arr[nx][ny]) {
+          isPeak = false;
+          break;
+        }
+      }
+      isPeak && result++;
     }
   }
-
-  console.log(count);
+  console.log(result);
 });

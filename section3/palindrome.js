@@ -14,24 +14,32 @@ gooG
 YES
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
 
   rl.close();
-}).on("close", () => {
-  const str = input[0];
-  console.log(
-    str.toLowerCase() === Array.from(str).reverse().join("").toLowerCase()
-      ? "YES"
-      : "NO"
-  );
+}).on('close', () => {
+  // const str = input[0];
+  // console.log(
+  //   str.toLowerCase() === Array.from(str).reverse().join("").toLowerCase()
+  //     ? "YES"
+  //     : "NO"
+  // );
+
+  const str = input[0].toLowerCase();
+  // let result = 'YES';
+  // for (let i = 0; i < Math.round(str.length / 2) - 1; i++) {
+  //   str[i] !== str[str.length - 1 - i] && (result = 'NO');
+  // }
+
+  console.log(Array.from(str).reverse().join('') === str ? 'YES' : 'NO');
 });

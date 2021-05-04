@@ -13,32 +13,44 @@ teachermode e
 1 0 1 2 1 0 1 2 2 1 0
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
 
   rl.close();
-}).on("close", () => {
-  const [str, target] = input[0].split(" ");
+}).on('close', () => {
+  // const [str, target] = input[0].split(" ");
 
-  let resultArr = [];
+  // let resultArr = [];
 
+  // for (let i = 0; i < str.length; i++) {
+  //   for (let j = 0; j < str.length; j++) {
+  //     if (str[i + j] === target || str[i - j >= 0 ? i - j : 0] === target) {
+  //       resultArr.push(j);
+  //       break;
+  //     }
+  //   }
+  // }
+
+  // console.log(resultArr.join(" "));
+
+  const [str, target] = input[0].split(' ');
+  let result = [];
   for (let i = 0; i < str.length; i++) {
-    for (let j = 0; j < str.length; j++) {
-      if (str[i + j] === target || str[i - j >= 0 ? i - j : 0] === target) {
-        resultArr.push(j);
+    for (let dist = 0; dist < str.length; dist++) {
+      if (str[i - dist] === target || str[i + dist] === target) {
+        result.push(dist);
         break;
       }
     }
   }
-
-  console.log(resultArr.join(" "));
+  console.log(result);
 });

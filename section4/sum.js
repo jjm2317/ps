@@ -15,37 +15,76 @@ N개의 자연수가 입력되면 각 자연수의 자릿수의 합을 구하고
 137
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
   if (input.length === 2) rl.close();
-}).on("close", () => {
-  const arr = input[1].split(" ");
-  let max = Number.MIN_SAFE_INTEGER;
-  let result;
-  for (let num of arr) {
-    let sum = 0;
-    for (let i = 0; i < num.length; i++) {
-      sum += +num[i];
-    }
-    if (max <= sum) {
-      if (max === sum) {
-        result = result < num ? num : result;
-      } else {
-        max = sum;
+}).on('close', () => {
+  // const arr = input[1].split(" ");
+  // let max = Number.MIN_SAFE_INTEGER;
+  // let result;
+  // for (let num of arr) {
+  //   let sum = 0;
+  //   for (let i = 0; i < num.length; i++) {
+  //     sum += +num[i];
+  //   }
+  //   if (max <= sum) {
+  //     if (max === sum) {
+  //       result = result < num ? num : result;
+  //     } else {
+  //       max = sum;
 
-        result = num;
-      }
+  //       result = num;
+  //     }
+  //   }
+  // }
+
+  // console.log(result);
+
+  const n = +input[0];
+  const arr = input[1].split(' ').map(v => +v);
+  let max = Number.MIN_SAFE_INTEGER;
+  let result = 0;
+
+  for (let num of arr) {
+    let target = num;
+    let sum = 0;
+    while (target) {
+      sum += target % 10;
+      target = parseInt(target / 10);
+    }
+    if (sum > max) {
+      max = sum;
+      result = num;
+    }
+
+    if (sum === max) {
+      result = num > result ? num : result;
     }
   }
-
   console.log(result);
+
+  // let n = +input[0];
+  // const arr = input[1].split(' ').map(v => +v);
+
+  // let result = 0;
+  // for (let i = 0; i < n; i++) {
+  //   result *= 10;
+  //   result += arr[i];
+  // }
+  // let result = 0;
+  // while (n) {
+  //   result *= 10;
+  //   result += n % 10;
+  //   n = parseInt(n / 10);
+  // }
+  // console.log(result);
 });
