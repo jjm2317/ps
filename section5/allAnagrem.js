@@ -14,50 +14,88 @@ abc
 3
 */
 
-const readline = require('readline');
+const readline = require("readline");
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 const input = [];
 
-rl.on('line', line => {
+rl.on("line", (line) => {
   input.push(line);
   if (input.length === 2) rl.close();
-}).on('close', () => {
+}).on("close", () => {
+  // const str = input[0];
+  // const target = input[1];
+  // let result = 0;
+  // let tMap = new Map();
+  // const isAnswer = map => {
+  //   let result = true;
+  //   for ([key, value] of map) {
+  //     if (value !== 0) return false;
+  //   }
+  //   return true;
+  // };
+  // // create target hash
+  // for (let t of target) {
+  //   if (tMap.has(t)) tMap.set(t, tMap.get(t) + 1);
+  //   else tMap.set(t, 1);
+  // }
+  // let lp = 0;
+  // // 초깃값 검증
+  // for (let i = 0; i < target.length; i++) {
+  //   if (tMap.has(str[i])) tMap.set(str[i], tMap.get(str[i]) - 1);
+  // }
+  // console.log(tMap);
+  // if (isAnswer(tMap)) result++;
+
+  // for (let rp = target.length; rp < str.length; rp++) {
+  //   if (tMap.has(str[rp])) tMap.set(str[rp], tMap.get(str[rp]) + 1);
+  //   if (tMap.has(str[lp])) tMap.set(str[lp], tMap.get(str[lp]) - 1);
+  //   lp++;
+  //   console.log(tMap);
+  //   if (isAnswer(tMap)) result++;
+  // }
+
+  // console.log(result);
+
   const str = input[0];
   const target = input[1];
-  let result = 0;
-  let tMap = new Map();
-  const isAnswer = map => {
-    let result = true;
-    for ([key, value] of map) {
-      if (value !== 0) return false;
+  Map.prototype[Symbol.for("compare")] = function (map) {
+    if (this.size !== map.size) return false;
+    for ([key, val] of this) {
+      if (!map.has(key) || map.get(key) !== val) return false;
     }
+
     return true;
   };
-  // create target hash
-  for (let t of target) {
-    if (tMap.has(t)) tMap.set(t, tMap.get(t) + 1);
-    else tMap.set(t, 1);
+  const sMap = new Map();
+  const tMap = new Map();
+  //target map init
+  for (let s of target) {
+    if (tMap.has(s)) tMap.set(s, tMap.get(s) + 1);
+    else tMap.set(s, 1);
   }
+  //str map init
+  const len = target.length - 1;
+
+  for (let i = 0; i < len; i++) {
+    if (sMap.has(str[i])) sMap.set(str[i], sMap.get(str[i]) + 1);
+    else sMap.set(str[i], 1);
+  }
+  //sliding window
+  let answer = 0;
   let lp = 0;
-  // 초깃값 검증
-  for (let i = 0; i < target.length; i++) {
-    if (tMap.has(str[i])) tMap.set(str[i], tMap.get(str[i]) - 1);
-  }
-  console.log(tMap);
-  if (isAnswer(tMap)) result++;
-
-  for (let rp = target.length; rp < str.length; rp++) {
-    if (tMap.has(str[rp])) tMap.set(str[rp], tMap.get(str[rp]) + 1);
-    if (tMap.has(str[lp])) tMap.set(str[lp], tMap.get(str[lp]) - 1);
+  for (let rp = len; rp < str.length; rp++) {
+    if (sMap.has(str[rp])) sMap.set(str[rp], sMap.get(str[rp]) + 1);
+    else sMap.set(str[rp], 1);
+    if (tMap[Symbol.for("compare")](sMap)) answer++;
+    if (sMap.has(str[lp])) sMap.set(str[lp], sMap.get(str[lp]) - 1);
+    if (sMap.get(str[lp]) === 0) sMap.delete(str[lp]);
     lp++;
-    console.log(tMap);
-    if (isAnswer(tMap)) result++;
   }
 
-  console.log(result);
+  console.log(answer);
 });
