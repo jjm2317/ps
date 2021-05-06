@@ -42,28 +42,52 @@ rl.on('line', line => {
   // }
   // console.log(result.join(" "));
 
+  // const n = +input[0];
+  // const arr = input[1].split(' ').map(v => +v);
+  // const isPrime = num => {
+  //   if (num === 1) return false;
+  //   for (let i = 2; i < num; i++) {
+  //     // if(num / i)
+  //     if (num % i === 0) return false;
+  //   }
+  //   return true;
+  // };
+
+  // let result = [];
+
+  // for (let num of arr) {
+  //   let temp = 0;
+  //   while (num) {
+  //     temp *= 10;
+  //     temp += num % 10;
+  //     num = Math.floor(num / 10);
+  //   }
+
+  //   if (isPrime(temp)) result.push(temp);
+  // }
+  // console.log(result);
+
   const n = +input[0];
+
   const arr = input[1].split(' ').map(v => +v);
+  let answer = [];
   const isPrime = num => {
     if (num === 1) return false;
-    for (let i = 2; i < num; i++) {
-      // if(num / i)
+    for (let i = 2; i <= parseInt(Math.sqrt(num)); i++) {
       if (num % i === 0) return false;
     }
     return true;
   };
-
-  let result = [];
-
   for (let num of arr) {
-    let temp = 0;
+    let revNum = 0;
     while (num) {
-      temp *= 10;
-      temp += num % 10;
+      revNum *= 10;
+      revNum += num % 10;
       num = Math.floor(num / 10);
     }
 
-    if (isPrime(temp)) result.push(temp);
+    if (isPrime(revNum)) answer.push(revNum);
   }
-  console.log(result);
+
+  console.log(answer);
 });

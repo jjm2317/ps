@@ -26,42 +26,62 @@ M번의 수학성적이 주어지면 멘토와 멘티가 되는 짝을 만들 �
 (3, 1), (3, 2), (4, 2)와 같이 3가지 경우의 (멘토, 멘티) 짝을 만들 수 있다
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
-  if (input.length - 1 === +input[0].split(" ")[1]) rl.close();
-}).on("close", () => {
-  const [n, m] = input[0].split(" ").map((v) => +v);
-  const arr = input
-    .filter((_, i) => i > 0)
-    .map((v) => v.split(" ").map((v) => +v));
-  let result = 0;
-  for (let i = 1; i <= n; i++) {
-    let mento = [];
-    for (let j = 0; j < m; j++) {
-      let rank = arr[j].indexOf(i);
-      for (let k = 0; k < n; k++) {
-        if (rank < k) {
-          if (j === 0) {
-            mento.push(arr[j][k]);
-          } else {
-            mento.includes(arr[j][k]) ||
-              mento.splice(mento.indexOf(arr[j][k]), 1);
-          }
-        }
-      }
-    }
-    result += mento.length;
-    mento = [];
-  }
+  if (input.length - 1 === +input[0].split(' ')[1]) rl.close();
+}).on('close', () => {
+  // const [n, m] = input[0].split(" ").map((v) => +v);
+  // const arr = input
+  //   .filter((_, i) => i > 0)
+  //   .map((v) => v.split(" ").map((v) => +v));
+  // let result = 0;
+  // for (let i = 1; i <= n; i++) {
+  //   let mento = [];
+  //   for (let j = 0; j < m; j++) {
+  //     let rank = arr[j].indexOf(i);
+  //     for (let k = 0; k < n; k++) {
+  //       if (rank < k) {
+  //         if (j === 0) {
+  //           mento.push(arr[j][k]);
+  //         } else {
+  //           mento.includes(arr[j][k]) ||
+  //             mento.splice(mento.indexOf(arr[j][k]), 1);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   result += mento.length;
+  //   mento = [];
+  // }
 
-  console.log(result);
+  // console.log(result);
+
+  let [n, m] = input[0].split(' ').map(v => +v);
+
+  const arr = input.filter((_, i) => i > 0).map(v => v.split(' ').map(v => +v));
+  let answer = 0;
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= n; j++) {
+      let cnt = 0;
+      for (let r = 0; r < m; r++) {
+        let posi, posj;
+        for (let c = 0; c < n; c++) {
+          if (arr[r][c] === i) posi = c;
+          if (arr[r][c] === j) posj = c;
+        }
+        if (posi < posj) cnt++;
+      }
+      if (cnt === 3) answer++;
+    }
+  }
+  console.log(answer);
 });
