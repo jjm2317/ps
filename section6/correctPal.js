@@ -25,20 +25,32 @@ rl.on("line", (line) => {
   input.push(line);
   rl.close();
 }).on("close", () => {
+  // const str = input[0];
+  // let stack = [];
+  // let result = true;
+  // for (let char of str) {
+  //   if (char === "(") {
+  //     stack.push(char);
+  //   } else {
+  //     if (stack.pop() !== "(") {
+  //       result = false;
+  //       break;
+  //     }
+  //   }
+  // }
+  // if (stack.length !== 0) result = false;
+  // console.log(result ? "YES" : "NO");
+
   const str = input[0];
-  let stack = [];
+  const stack = [];
   let result = true;
-  for (let char of str) {
-    if (char === "(") {
-      stack.push(char);
+  for (let s of str) {
+    if (s === "(") {
+      stack.push(s);
     } else {
-      if (stack.pop() !== "(") {
-        result = false;
-        break;
-      }
+      if (stack.pop() !== "(") result = false;
     }
   }
   if (stack.length !== 0) result = false;
-
   console.log(result ? "YES" : "NO");
 });
