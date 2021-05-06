@@ -18,42 +18,70 @@ K번째 큰 수
 143
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
   if (input.length === 2) rl.close();
-}).on("close", () => {
-  const [n, k] = input[0].split(" ").map((v) => +v);
-  const arr = input[1].split(" ").map((v) => +v);
-  let count = 1;
-  arr.sort((a, b) => b - a);
-  let cur = arr[0] + arr[1] + arr[2];
-  let result = 0;
+}).on('close', () => {
+  // const [n, k] = input[0].split(" ").map((v) => +v);
+  // const arr = input[1].split(" ").map((v) => +v);
+  // let count = 1;
+  // arr.sort((a, b) => b - a);
+  // let cur = arr[0] + arr[1] + arr[2];
+  // let result = 0;
+  // let newArr = [];
+  // for (let i = 0; i < n - 2; i++) {
+  //   for (let j = i + 1; j < n - 1; j++) {
+  //     for (let x = j + 1; x < n; x++) {
+  //       newArr.push(arr[i] + arr[j] + arr[x]);
+  //     }
+  //   }
+  // }
+
+  // newArr.sort((a, b) => b - a);
+  // for (let num of newArr) {
+  //   if (cur !== num && cur > num) count++;
+  //   if (count === k) {
+  //     result = num;
+  //     break;
+  //   }
+  // }
+
+  // console.log(result);
+
+  const [n, k] = input[0].split(' ').map(v => +v);
+
+  const arr = input[1].split(' ').map(v => +v);
   let newArr = [];
   for (let i = 0; i < n - 2; i++) {
     for (let j = i + 1; j < n - 1; j++) {
-      for (let x = j + 1; x < n; x++) {
-        newArr.push(arr[i] + arr[j] + arr[x]);
+      for (let k = 0; k < n; k++) {
+        newArr.push(arr[i] + arr[j] + arr[k]);
       }
     }
   }
 
   newArr.sort((a, b) => b - a);
-  for (let num of newArr) {
-    if (cur !== num && cur > num) count++;
+
+  let count = 1;
+  let temp = newArr[0];
+  for (let i = 1; i < newArr.length; i++) {
+    if (newArr[i] > temp) {
+      temp = newArr[i];
+      count++;
+    }
+
     if (count === k) {
-      result = num;
       break;
     }
   }
-
-  console.log(result);
+  console.log(temp);
 });

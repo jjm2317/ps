@@ -25,34 +25,57 @@
 출력설명
 (2, 2), (4, 3), (4, 5)와 (10, 3)를 할인받아 (5, 3)에 사면 비용이 4+7+9+8=28입니다.
 */
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
-  if (input.length - 1 === +input[0].split(" ")[0]) rl.close();
-}).on("close", () => {
-  const [n, m] = input[0].split(" ").map((v) => +v);
-  const arr = input
-    .filter((_, i) => i > 0)
-    .map((v) => v.split(" ").map((v) => +v));
-  let max = Number.MIN_SAFE_INTEGER;
+  if (input.length - 1 === +input[0].split(' ')[0]) rl.close();
+}).on('close', () => {
+  // const [n, m] = input[0].split(" ").map((v) => +v);
+  // const arr = input
+  //   .filter((_, i) => i > 0)
+  //   .map((v) => v.split(" ").map((v) => +v));
+  // let max = Number.MIN_SAFE_INTEGER;
 
+  // for (let i = 0; i < n; i++) {
+  //   let count = 0;
+  //   let sum = 0;
+  //   let newArr = arr.map((item, idx) =>
+  //     idx === i ? item[0] / 2 + item[1] : item.reduce((pre, cur) => pre + cur)
+  //   );
+  //   newArr.sort((f, s) => f - s);
+  //   for (let price of newArr) {
+  //     sum += price;
+  //     if (sum <= m) count++;
+  //   }
+  //   if (count > max) max = count;
+  // }
+
+  // console.log(max);
+
+  const [n, m] = input[0].split(' ').map(v => +v);
+
+  const arr = input.filter((_, i) => i > 0).map(v => v.split(' ').map(v => +v));
+  let max = Number.MIN_SAFE_INTEGER;
   for (let i = 0; i < n; i++) {
-    let count = 0;
+    let newArr = [];
+    for (let j = 0; j < n; j++) {
+      if (i === j) newArr.push(parseInt(arr[j][0] / 2) + arr[j][1]);
+      else newArr.push(parseInt(arr[j][0] + arr[j][1]));
+    }
+    newArr.sort((a, b) => a - b);
+    console.log(newArr);
     let sum = 0;
-    let newArr = arr.map((item, idx) =>
-      idx === i ? item[0] / 2 + item[1] : item.reduce((pre, cur) => pre + cur)
-    );
-    newArr.sort((f, s) => f - s);
-    for (let price of newArr) {
-      sum += price;
+    let count = 0;
+    for (let num of newArr) {
+      sum += num;
       if (sum <= m) count++;
     }
     if (count > max) max = count;
