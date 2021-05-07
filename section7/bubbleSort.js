@@ -15,26 +15,37 @@ N개이 숫자가 입력되면 오름차순으로 정렬하여 출력하는 프�
 5 7 11 13 15 23
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
   if (input.length === 2) rl.close();
-}).on("close", () => {
+}).on('close', () => {
+  // const n = +input[0];
+  // const arr = input[1].split(" ").map((v) => +v);
+
+  // for (let i = 0; i < n - 1; i++) {
+  //   for (let j = 0; j < n - i - 1; j++) {
+  //     if (arr[j] > arr[j + 1]) [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+  //   }
+  // }
+  // console.log(arr);
+
   const n = +input[0];
-  const arr = input[1].split(" ").map((v) => +v);
+  const arr = input[1].split(' ').map(v => +v);
 
   for (let i = 0; i < n - 1; i++) {
     for (let j = 0; j < n - i - 1; j++) {
       if (arr[j] > arr[j + 1]) [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
     }
   }
+
   console.log(arr);
 });

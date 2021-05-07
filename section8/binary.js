@@ -11,29 +11,38 @@
 ▣ 출력예제 1
 1011
 */
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
+rl.on('line', line => {
   input.push(line);
   rl.close();
-}).on("close", () => {
+}).on('close', () => {
+  // const n = +input[0];
+  // let result = "";
+  // const DFS = (n) => {
+  //   if (n === 0) return;
+
+  //   DFS(parseInt(n / 2));
+  //   result += n % 2 === 1 ? 1 : 0;
+  // };
+
+  // DFS(n);
+
+  // console.log(result);
   const n = +input[0];
-  let result = "";
-  const DFS = (n) => {
+
+  const DFS = n => {
     if (n === 0) return;
 
-    DFS(parseInt(n / 2));
-    result += n % 2 === 1 ? 1 : 0;
+    DFS(n - 1);
+    console.log(n);
   };
-
   DFS(n);
-
-  console.log(result);
 });

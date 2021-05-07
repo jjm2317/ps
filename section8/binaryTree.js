@@ -9,18 +9,39 @@
 후위순회 출력 : 4 5 2 6 7 3 1
 */
 
-const readline = require("readline");
+const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 const input = [];
 
-rl.on("line", (line) => {
-  // input.push(line);
+rl.on('line', line => {
+  input.push(line);
   rl.close();
-}).on("close", () => {
-  console.log(1);
+}).on('close', () => {
+  // const n = +input[0];
+  // let answer = '';
+  // function DFS(v) {
+  //   if (v > 7) return;
+  //   else {
+  //     DFS(v * 2);
+  //     DFS(v * 2 + 1);
+  //     answer += v + ' ';
+  //   }
+  // }
+  // DFS(n);
+  // console.log(answer);
+  const n = +input[0];
+
+  const DFS = v => {
+    if (v > n) return;
+
+    DFS(v * 2);
+    DFS(v * 2 + 1);
+    console.log(v);
+  };
+  DFS(1);
 });
