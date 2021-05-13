@@ -54,12 +54,6 @@ function solution(places) {
           answer[i] = 0;
           break;
         } else if (getMdist(pPosList[j], pPosList[k]) === 2) {
-          // console.log(
-          //   testPartition(pPosList[j], pPosList[k], places[i]),
-          //   i,
-          //   pPosList[j],
-          //   pPosList[k]
-          // );
           if (!testPartition(pPosList[j], pPosList[k], places[i])) {
             answer[i] = 0;
             break;

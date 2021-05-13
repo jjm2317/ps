@@ -1,5 +1,5 @@
 function solution(s) {
-  let answer = 0;
+  // let answer = 0;
   const map = new Map([
     ["zero", 0],
     ["one", 1],
@@ -12,10 +12,22 @@ function solution(s) {
     ["eight", 8],
     ["nine", 9],
   ]);
-
-  // for (let c of s) {
-  // }
-  console.log("dfff".match(/[0-9]/));
-  return answer;
+  let result = "";
+  let target = "";
+  for (let c of s) {
+    if (c.match(/[0-9]/)) {
+      result += c;
+    } else {
+      target += c;
+      if (map.has(target)) {
+        result += map.get(target);
+        target = "";
+      }
+    }
+  }
+  // console.log("dfff".match(/[0-9]/));
+  return +result;
 }
 solution();
+
+("42three426five75zero");
