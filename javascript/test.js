@@ -20,3 +20,9 @@ console.log(process(input));
 //     return pre;
 //   }, new Map())
 // );
+async function main() {
+  const [a, b] = await Promise.all([f1(), f2()]);
+  const c = await f3(b);
+  const d = await f4(a, c);
+  return d;
+}
