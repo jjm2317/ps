@@ -33,21 +33,24 @@ rl.on("line", (line) => {
   rl.close();
 }).on("close", () => {
   const n = +input[0];
-  let answer;
-  let ch = Array.from({ length: n + 1 }, () => 0);
+  const result = [];
+  const arr = Array.from({ length: n + 1 }, () => 0);
+
   const DFS = (v) => {
     if (v > n) {
       let str = "";
-      for (let i = 1; i <= n; i++) {
-        if (ch[i] === 1) str += i + " ";
+      for (let i = 0; i <= n; i++) {
+        if (arr[i] === 1) str += i + " ";
       }
-      console.log(str);
+
+      if (str !== "") result.push(str);
       return;
     }
-    ch[v] = 1;
+    arr[v] = 1;
     DFS(v + 1);
-    ch[v] = 0;
+    arr[v] = 0;
     DFS(v + 1);
   };
   DFS(1);
+  console.log(result);
 });

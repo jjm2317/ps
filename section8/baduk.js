@@ -34,19 +34,18 @@ rl.on("line", (line) => {
 }).on("close", () => {
   const [c, n] = input[0].split(" ").map((v) => +v);
   const arr = input.filter((_, i) => i > 0).map((v) => +v);
-  let sum = 0;
-  let max = Number.MIN_SAFE_INTEGER;
-  const DFS = (v) => {
-    if (v === n) {
-      if (sum > c) return;
-      if (sum > max) max = sum;
+  let result = Number.MIN_SAFE_INTEGER;
+
+  const DFS = (L, sum) => {
+    if (sum > c) return;
+    if (L >= n) {
+      result = Math.max(result, sum);
       return;
     }
-    sum += arr[v];
-    DFS(v + 1);
-    sum -= arr[v];
-    DFS(v + 1);
+
+    DFS(L + 1, sum + arr[L]);
+    DFS(L + 1, sum);
   };
-  DFS(0);
-  console.log(max);
+  DFS(0, 0);
+  console.log(result);
 });

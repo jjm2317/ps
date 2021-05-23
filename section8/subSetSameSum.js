@@ -33,26 +33,25 @@ rl.on("line", (line) => {
   if (input.length === 2) rl.close();
 }).on("close", () => {
   const n = +input[0];
-
   const arr = input[1].split(" ").map((v) => +v);
-  let sum = arr.reduce((pre, cur) => pre + cur);
-  let check = Array.from({ length: n }, () => 0);
-  let result = false;
-  const DFS = (v) => {
-    if (v === n) {
-      if (check.filter((item) => item === 1).length === 0) return;
-      let target = arr
-        .filter((_, i) => check[i] === 1)
-        .reduce((pre, cur) => pre + cur);
-      if (target === sum - target) result = true;
+  let total = arr.reduce((pre, cur) => pre + cur);
+  let flag = 0;
+  let result = "NO";
+
+  const DFS = (v, sum) => {
+    if (flag === 1) return;
+    if (v >= n) {
+      if (total - sum === sum) {
+        result = "YES";
+        flag = 1;
+      }
       return;
     }
-    check[v] = 1;
-    DFS(v + 1);
-    check[v] = 0;
-    DFS(v + 1);
-  };
-  DFS(0);
 
-  console.log(result ? "YES" : "NO");
+    DFS(v + 1, sum + arr[v]);
+    DFS(v + 1, sum);
+  };
+  DFS(0, 0);
+
+  console.log(result);
 });

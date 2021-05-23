@@ -24,14 +24,14 @@ rl.on("line", (line) => {
 }).on("close", () => {
   const n = +input[0];
 
-  const DFS = (v) => {
-    if (v > n) return;
-    console.log(v + "전위");
-    DFS(v * 2);
+  const DFS = (v, depth) => {
+    if (depth > 3) return;
+
     // console.log(v);
-    console.log(v + "중위");
-    DFS(v * 2 + 1);
-    console.log(v + "후위");
+    DFS(v * 2, depth + 1);
+    console.log(v);
+
+    DFS(v * 2 + 1, depth + 1);
   };
-  DFS(1);
+  DFS(1, 1);
 });

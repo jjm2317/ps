@@ -26,29 +26,11 @@ rl.on("line", (line) => {
 
   if (input.length === 1) rl.close();
 }).on("close", () => {
-  // const n = +input[0];
-
-  // let result = [];
-
-  // const rec = (n) => {
-  //   if (n === 1) {
-  //     result.push(n);
-  //     return 1;
-  //   }
-  //   result.push(1 + rec(n - 1));
-  //   return n;
-  // };
-  // rec(n);
-  // console.log(result);
   const n = +input[0];
-  const result = [];
-  const DFS = (n) => {
-    if (n === 0) return;
-
-    DFS(n - 1);
-    result.push(n);
+  const DFS = (L) => {
+    if (L === 0) return;
+    console.log(L);
+    DFS(L - 1);
   };
-
-  DFS(n);
-  console.log(result);
+  DFS(3);
 });

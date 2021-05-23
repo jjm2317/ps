@@ -36,30 +36,18 @@ rl.on("line", (line) => {
   rl.close();
 }).on("close", () => {
   const [n, m] = input[0].split(" ").map((v) => +v);
-  let checkMap = new Map();
-  for (let i = 1; i <= n; i++) {
-    checkMap.set(i, 0);
-  }
-  console.log(checkMap);
-  const DFS = (depth) => {
-    if (depth > m) {
-      let result = "";
-      for ([key, val] of checkMap) {
-        for (let i = 0; i < val; i++) {
-          result += key + " ";
-        }
-      }
-      console.log(result.trim());
+  const result = [];
+  const temp = Array.from({ length: m }, () => 0);
+  DFS = (L) => {
+    if (L === m) {
+      result.push(temp.slice());
       return;
     }
-
     for (let i = 1; i <= n; i++) {
-      checkMap.set(i, checkMap.get(i) + 1);
-      DFS(depth + 1);
-      checkMap.set(i, checkMap.get(i) - 1);
+      temp[L] = i;
+      DFS(L + 1);
     }
-    // checkMap.set(v, checkMap.get(v) - 1);
   };
-
-  DFS(1);
+  DFS(0);
+  console.log(result);
 });
