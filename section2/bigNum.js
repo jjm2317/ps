@@ -10,45 +10,26 @@ N(1<=N<=100)개의 정수를 입력받아, 자신의 바로 앞 수보다 큰 �
 7 3 9 5 6 12
 ▣ 출력예제 1
 7 9 6 12 */
-const readline = require('readline');
+const readline = require("readline");
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 const input = [];
 
-rl.on('line', line => {
+rl.on("line", (line) => {
   input.push(line);
 
   if (input.length === 2) rl.close();
-}).on('close', () => {
-  // const n = input[0];
-  // const numArr = input[1].split(" ").map((v) => +v);
-  // const result = [numArr[0]];
-  // numArr.reduce((pre, cur) => {
-  //   if (pre < cur) result.push(cur);
-  //   return cur;
-  // });
-
-  // console.log(result.join(" "));
-
+}).on("close", () => {
   const n = +input[0];
-  // const arr = [Number.MIN_SAFE_INTEGER, ...input[1].split(' ').map(v => +v)];
-  const arr = input[1].split(' ').map(v => +v);
-  let result = [];
-
-  // for (let i = 1; i <= n; i++) {
-  //   arr[i] > arr[i - 1] && result.push(arr[i]);
-  // }
-
-  // console.log(result);
-
-  result.push(arr[0]);
-
+  const arr = input[1].split(" ").map((v) => +v);
+  const result = [arr[0]];
   for (let i = 1; i < n; i++) {
     if (arr[i] > arr[i - 1]) result.push(arr[i]);
   }
+
   console.log(result);
 });

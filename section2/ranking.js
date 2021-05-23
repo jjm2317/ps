@@ -15,38 +15,22 @@ N(1<=N<=100)명의 학생의 국어점수가 입력되면 각 학생의 등수�
 4 3 2 1 5
 */
 
-const readline = require('readline');
+const readline = require("readline");
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 const input = [];
 
-rl.on('line', line => {
+rl.on("line", (line) => {
   input.push(line);
 
   if (input.length === 2) rl.close();
-}).on('close', () => {
-  // const score = input[1].split(" ").map((v) => +v);
-  // const copy = [...score];
-  // const result = [];
-  // score.sort((v1, v2) => v2 - v1);
-  // score.forEach((item, i, arr) => {
-  //   if (i === 0) {
-  //     result.push(1);
-  //   } else if (arr[i - 1] === item) {
-  //     result.push(result[i - 1]);
-  //   } else result.push(i + 1);
-  // });
-  // const result1 = copy.map((item) => {
-  //   return result[score.indexOf(item)];
-  // });
-  // console.log(result1);
-
+}).on("close", () => {
   const n = +input[0];
-  const arr = input[1].split(' ').map(v => +v);
+  const arr = input[1].split(" ").map((v) => +v);
   // const result = [];
   // for (let num of arr) {
   //   let rank = 1;
@@ -57,12 +41,22 @@ rl.on('line', line => {
   // }
   // console.log(result);
 
-  const result = Array.from({ length: n }, () => 1);
+  // const result = Array.from({ length: n }, () => 1);
+
+  // for (let i = 0; i < n; i++) {
+  //   for (let compare of arr) {
+  //     arr[i] < compare && result[i]++;
+  //   }
+  // }
+  // console.log(result);
+  let result = [];
 
   for (let i = 0; i < n; i++) {
-    for (let compare of arr) {
-      arr[i] < compare && result[i]++;
+    let rank = 1;
+    for (let j = 0; j < n; j++) {
+      if (arr[i] < arr[j]) rank++;
     }
+    result.push(rank);
   }
   console.log(result);
 });

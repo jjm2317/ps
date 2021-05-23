@@ -26,38 +26,22 @@ OX 문제는 맞거나 틀린 두 경우의 답을 가지는 문제를 말한다
 10
 */
 
-const readline = require('readline');
+const readline = require("readline");
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 const input = [];
 
-rl.on('line', line => {
+rl.on("line", (line) => {
   input.push(line);
 
   if (input.length === 2) rl.close();
-}).on('close', () => {
-  // const arr = input[1].split(" ").map((v) => +v);
-  // const result = [];
-
-  // arr.reduce((pre, cur) => {
-  //   if (cur === 0) {
-  //     result.push(0);
-  //     return 0;
-  //   } else {
-  //     ++pre;
-  //     result.push(pre);
-  //     return pre;
-  //   }
-  // }, 0);
-
-  // console.log(result.reduce((pre, cur) => pre + cur));
-
-  const n = +input[0];
-  const arr = [0, ...input[1].split(' ').map(v => +v)];
+}).on("close", () => {
+  // const n = +input[0];
+  // const arr = [0, ...input[1].split(' ').map(v => +v)];
 
   // let result = 0;
   // let bonus = 0;
@@ -67,13 +51,27 @@ rl.on('line', line => {
   //   else bonus = 0;
   //   arr[i] === 1 && (result += arr[i] + bonus);
   // }
+  // let result = 0;
+  // let count = 0;
+  // for (let num of arr) {
+  //   if (num === 1) {
+  //     result += ++count;
+  //   } else count = 0;
+  // }
+
+  // console.log(result);
+
+  const n = +input[0];
+  const arr = input[1].split(" ").map((v) => +v);
   let result = 0;
   let count = 0;
-  for (let num of arr) {
-    if (num === 1) {
-      result += ++count;
-    } else count = 0;
+  for (num of arr) {
+    if (num) {
+      count++;
+      result += count;
+    } else {
+      count = 0;
+    }
   }
-
   console.log(result);
 });
