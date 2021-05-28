@@ -60,24 +60,28 @@ rl.on("line", (line) => {
 
   let ch = Array.from({ length: 10001 }, () => 0);
   let dis = Array.from({ length: 10001 }, () => 0);
-  let queue = [];
-  let flag = 0;
-  ch[s] = 1;
+  const queue = [];
+  let answer = 0;
   queue.push(s);
+  ch[s] = 1;
   dis[s] = 0;
+  let flag = 0;
   while (queue.length && !flag) {
+    console.log(queue);
     let x = queue.shift();
-    for (let nx of [x - 1, x + 1, x + 5]) {
+    for (let nx of [x - 1, x + 1, x + 1]) {
       if (nx === e) {
-        result = dis[x] + 1;
+        answer = dis[x] + 1;
         flag = 1;
         break;
       }
-      if ((nx <= 0 && nx > 10000) || ch[nx] === 1) break;
-      ch[nx] = 1;
-      queue.push(nx);
-      dis[nx] = dis[x] + 1;
+      if (nx > 0 && nx <= 10000 && ch[nx] === 0) {
+        ch[nx] = 1;
+        queue.push(nx);
+        dis[nx] = dis[x] + 1;
+      }
     }
   }
-  console.log(result);
+
+  console.log(answer);
 });

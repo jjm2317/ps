@@ -52,29 +52,27 @@ rl.on("line", (line) => {
   7. x + dx, y + dy 가 1
   8. 탈출조건: 인수로 받은 x, y좌표가 종점과 같을 때
   */
-  const dx = [-1, 0, 1, 0];
-  const dy = [0, 1, 0, -1];
-  let result = 0;
+  let answer = 0;
+
+  let dx = [1, 0, -1, 0];
+  let dy = [0, -1, 0, 1];
+
   const DFS = (x, y) => {
     if (x === 6 && y === 6) {
-      result++;
+      answer++;
       return;
     }
     for (let i = 0; i < 4; i++) {
-      const nx = x + dx[i];
-      const ny = y + dy[i];
-      if (nx < 0 || ny < 0 || nx > 6 || ny > 6 || arr[nx][ny] === 1) continue;
-      arr[nx][ny] = 1;
-      DFS(nx, ny);
-      arr[nx][ny] = 0;
+      let nx = x + dx[i];
+      let ny = y + dy[i];
+      if (nx >= 0 && ny >= 0 && nx < 7 && ny < 7 && arr[nx][ny] === 0) {
+        arr[nx][ny] = 1;
+        DFS(nx, ny);
+        arr[nx][ny] = 0;
+      }
     }
   };
   arr[0][0] = 1;
   DFS(0, 0);
-  console.log(result);
-  /*
-  놓친것
-  1. x, y 좌표가 arr 크기 이상 넘어갈때 continue
-  2. 첫 가지 뻗기전에 시점 체크
-  */
+  console.log(answer);
 });

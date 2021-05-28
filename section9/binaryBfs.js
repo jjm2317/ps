@@ -32,7 +32,7 @@ rl.on("line", (line) => {
   */
 
   let answer = "";
-  const queue = [];
+  let queue = [];
   queue.push(1);
   while (queue.length) {
     let v = queue.shift();

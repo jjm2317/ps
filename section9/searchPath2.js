@@ -45,40 +45,28 @@ rl.on("line", (line) => {
   const arr = input
     .filter((_, i) => i > 0)
     .map((v) => v.split(" ").map((v) => +v));
+
   const graph = Array.from({ length: n + 1 }, () => []);
-  const path = [1];
-  for (let [s, e] of arr) {
-    graph[s].push(e);
-  }
-  /*
-  1. 정점 1에서 가지 뻗기
-  2. 1에서 연결된 edge로만 뻗어야됨
-  3. graph[v]에서 조회
-  4. 조회한 값을 DFS로 뻗어야됨
-  5. 가지를 뻗기전에 check[값] = 1 가지를 회수할 때 0
-  6. DFS(값);
-  7. 탈출 조건 V 가 목적 V와 같아지면 V === n;
-  8. 시작점이 정해져있으므로 check[시작] = 1
-  */
-  let result = 0;
   const check = Array.from({ length: n + 1 }, () => 0);
-  console.log(graph);
+
+  for (let [start, end] of arr) {
+    graph[start].push(end);
+  }
+  let answer = 0;
   const DFS = (v) => {
     if (v === n) {
-      console.log(path);
-      result++;
+      answer++;
       return;
     }
-    for (let end of graph[v]) {
-      if (check[end] === 1) continue;
-      check[end] = 1;
-      path.push(end);
-      DFS(end);
-      path.pop();
-      check[end] = 0;
+    for (let nv of graph[v]) {
+      if (check[nv] === 0) {
+        check[nv] = 1;
+        DFS(nv);
+        check[nv] = 0;
+      }
     }
   };
   check[1] = 1;
   DFS(1);
-  console.log(result);
+  console.log(answer);
 });

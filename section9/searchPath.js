@@ -42,44 +42,37 @@ rl.on("line", (line) => {
   input.push(line);
   if (input.length === input[0].split(" ").map((v) => +v)[1] + 1) rl.close();
 }).on("close", () => {
-  let answer = 0;
   const [n, m] = input[0].split(" ").map((v) => +v);
   const arr = input
     .filter((_, i) => i > 0)
-    .map((v) =>
-      v
-        .trim()
-        .split(" ")
-        .map((v) => +v)
-    );
-  const graph = Array.from({ length: n + 1 }, () => []);
-  for (let [st, ed] of arr) {
-    graph[st].push(ed);
-  }
-  /*
-  1. DFS 는 시점 기준
-  2. for loop으로 인접리스트의 해당 배열을 순회 
-  3. 되돌아가면 check
-  4. 
-  */
-  let result = 0;
+    .map((v) => v.split(" ").map((v) => +v));
+
+  let answer = 0;
+  const graph = Array.from(Array(n + 1), () => Array(n + 1).fill(0));
   const check = Array.from({ length: n + 1 }, () => 0);
+  const path = [];
+  for (let [start, end] of arr) {
+    graph[start][end] = 1;
+  }
+
   const DFS = (v) => {
     if (v === n) {
-      console.log(check);
-      result++;
-      return;
+      answer++;
     }
 
-    for (let item of graph[v]) {
-      if (check[item] === 0) {
-        check[item] = 1;
-        DFS(item);
-        check[item] = 0;
+    for (let i = 1; i <= n; i++) {
+      if (graph[v][i] === 1 && check[i] === 0) {
+        check[i] = 1;
+        path.push(i);
+        DFS(i);
+        check[i] = 0;
+        path.pop();
       }
     }
   };
+  path.push(1);
   check[1] = 1;
   DFS(1);
-  console.log(result);
+
+  console.log(answer);
 });
