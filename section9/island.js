@@ -57,8 +57,6 @@ rl.on("line", (line) => {
   const dy = [1, 0, -1, 0, 1, -1, -1, 1];
 
   const DFS = (x, y) => {
-    if (0) {
-    }
     for (let i = 0; i < 8; i++) {
       const nx = x + dx[i];
       const ny = y + dy[i];

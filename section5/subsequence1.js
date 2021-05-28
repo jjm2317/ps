@@ -34,30 +34,31 @@ rl.on("line", (line) => {
   const [n, m] = input[0].split(" ").map((v) => +v);
   const arr = input[1].split(" ").map((v) => +v);
 
-  let p1 = 0;
-  let p2 = 0;
-  let result = 0;
-  let sum = 0;
-  while ((p1 < n, p2 < n)) {
-    if (sum === 0) {
-      sum += arr[p1];
-    } else {
-      sum += arr[p2];
-    }
+  /*
+  1. rtemp, ltemp
+  2, rt로 for loop 순회하며 sum 저장
+  3. sum 검증 
+  */
 
-    if (sum < m) {
-      p2++;
-    } else if (sum > m) {
-      p1++;
-      p2 = p1;
-      sum = 0;
-    } else {
-      result++;
-      p1++;
-      p2 = p1;
-      sum = 0;
+  let ltemp = 0;
+  const result = [];
+  const tempArr = [];
+
+  let sum = 0;
+  for (let rtemp = 0; rtemp < n; rtemp++) {
+    sum += arr[rtemp];
+    tempArr.push(arr[rtemp]);
+
+    if (sum > m) {
+      while (sum > m) {
+        sum -= arr[ltemp];
+        tempArr.shift();
+        ltemp++;
+      }
+    }
+    if (sum === m) {
+      result.push(tempArr.slice());
     }
   }
-
   console.log(result);
 });

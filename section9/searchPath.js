@@ -52,27 +52,34 @@ rl.on("line", (line) => {
         .split(" ")
         .map((v) => +v)
     );
-  const graph = Array.from(Array(n + 1), () => Array(n + 1).fill(0));
-  const check = Array.from({ length: n + 1 }, () => 0);
-
-  for (let [s, e] of arr) {
-    graph[s][e] = 1;
+  const graph = Array.from({ length: n + 1 }, () => []);
+  for (let [st, ed] of arr) {
+    graph[st].push(ed);
   }
-
+  /*
+  1. DFS 는 시점 기준
+  2. for loop으로 인접리스트의 해당 배열을 순회 
+  3. 되돌아가면 check
+  4. 
+  */
+  let result = 0;
+  const check = Array.from({ length: n + 1 }, () => 0);
   const DFS = (v) => {
     if (v === n) {
-      answer++;
+      console.log(check);
+      result++;
       return;
     }
-    for (let i = 1; i <= n; i++) {
-      if (graph[v][i] === 1 && check[i] === 0) {
-        check[i] = 1;
-        DFS(i);
-        check[i] = 0;
+
+    for (let item of graph[v]) {
+      if (check[item] === 0) {
+        check[item] = 1;
+        DFS(item);
+        check[item] = 0;
       }
     }
   };
   check[1] = 1;
   DFS(1);
-  console.log(answer);
+  console.log(result);
 });

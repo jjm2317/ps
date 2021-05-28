@@ -28,30 +28,12 @@ rl.on("line", (line) => {
 
   rl.close();
 }).on("close", () => {
-  // const n = +input[0];
-  // let count = 0;
-  // const stair = (n) => {
-  //   if (n === 0) {
-  //     count++;
-  //     return;
-  //   }
-  //   if (n < 0) return;
-
-  //   stair(n - 1);
-  //   stair(n - 2);
-  // };
-  // stair(n);
-  // console.log(count);
-
   const n = +input[0];
-
-  const dy = Array.from({ length: n }, () => 0);
-
-  dy[0] = 1;
-  dy[1] = 2;
-  for (let i = 2; i < n; i++) {
-    dy[i] = dy[i - 1] + dy[i - 2];
+  const dy = Array.from({ length: n + 1 }, () => 0);
+  dy[1] = 1;
+  dy[2] = 2;
+  for (let i = 3; i <= n; i++) {
+    dy[i] = dy[i - 2] + dy[i - 1];
   }
-
-  console.log(dy[n - 1]);
+  console.log(dy[n]);
 });
