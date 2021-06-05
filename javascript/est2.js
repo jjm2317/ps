@@ -7,13 +7,13 @@
 6. 현재 상담중인데,끝나자마자 새로운 고객이 도착하면 끝난 고객을 제외하고 세자
 7. 입력 : 도착, 상담, 기대치
 8. 출력 : 상담시각 배열
-
 */
 /*
 1. 상담 종료 시각 
 2. dp 문제 같음
 3. 
 */
+
 function solution(customers) {
   const dy = Array.from({ length: customers.length }, () => 0);
   dy[0] = customers[0][0] + customers[0][1];

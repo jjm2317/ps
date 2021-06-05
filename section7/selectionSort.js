@@ -29,24 +29,6 @@ rl.on("line", (line) => {
 
   if (input.length === 2) rl.close();
 }).on("close", () => {
-  // const n = input[0];
-  // const arr = input[1].split(" ").map((v) => +v);
-
-  // for (let i = 0; i < arr.length - 1; i++) {
-  //   let min = Number.MAX_SAFE_INTEGER;
-  //   let temp = 0;
-  //   for (let j = i; j < arr.length; j++) {
-  //     if (arr[j] < min) {
-  //       min = arr[j];
-  //       temp = j;
-  //     }
-  //   }
-  //   arr[temp] = arr[i];
-  //   arr[i] = min;
-  // }
-
-  // console.log(arr);
-
   const n = +input[0];
   const arr = input[1].split(" ").map((v) => +v);
 
